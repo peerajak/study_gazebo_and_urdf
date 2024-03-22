@@ -1,0 +1,24 @@
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+    <param name="robot_description" command="cat '$(find robot_description)/urdf/robot.urdf'" />
+    
+    <arg name="x1" default="-1"/>
+    <arg name="y1" default="0"/>
+    <arg name="z1" default="0.5"/>
+    <arg name="yaw1" default="0"/>
+    <arg name="x2" default="4"/>
+    <arg name="y2" default="0"/>
+    <arg name="z2" default="0.5"/>
+    <arg name="yaw2" default="3.1416"/>
+
+    <node name="mybot_spawn1" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model $(arg model_name1) -x $(arg x1) -y $(arg y1) -z $(arg z1) -Y $(arg yaw1)" />
+    <node name="mybot_spawn2" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model $(arg model_name2) -x $(arg x2) -y $(arg y2) -z $(arg z2) -Y $(arg yaw2)" />     
+</launch>
